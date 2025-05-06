@@ -1,0 +1,59 @@
+{
+    // ===============================
+    // Core markdownlint Rules
+    // ===============================
+    "default": true,
+  
+    // --------------------------------
+    // Disabled for readability / practical reasons
+    // --------------------------------
+   // "MD013": false,  // Line length (we’ll rely on editor wrapping)  
+   "MD013": true,
+   "MD033": false,  // Inline HTML (allowed occasionally)  
+    "MD041": false,  // First line heading level (practical to start with content sometimes)
+  
+    // --------------------------------
+    // Heading / Section Consistency
+    // --------------------------------
+    "MD002": { "level": 2 },   // First heading must be at least level 2  
+    "MD003": { "style": "consistent" }, // Consistent heading style (atx or setext)  
+    "MD004": { "style": "asterisk" },   // Unordered list marker style (`*`)  
+    "MD025": false, // No multiple top-level headings in a file
+  
+    // --------------------------------
+    // Fenced Code Blocks
+    // --------------------------------
+    "MD047": true,  // Files should end with a single newline  
+    //"MD048": true,  // Code fence style (``` rather than ~~~)  
+    
+    "MD049": true,  // Code block language specifier is required  
+  
+    // --------------------------------
+    // List & Emphasis
+    // --------------------------------
+    "MD028": true,  // Blank line inside list items  
+    "MD029": { "style": "ordered" },  // Ordered list marker style (`1.`)  
+    "MD031": true,  // Fenced code blocks should be surrounded by blank lines  
+    "MD032": true,  // Lists should be surrounded by blank lines  
+    "MD036": true,  // Emphasis used instead of asterisks in _underscores_  
+  
+    // --------------------------------
+    // Links & Images
+    // --------------------------------
+    "MD041": false, // (see above)  
+    //"MD042": true,  // No bare URLs  
+    "MD043": true,  // Heading IDs should be no more than 72 characters  
+    "MD045": true,  // Images should have alternate text  
+  
+    // --------------------------------
+    // Misc Best Practices
+    // --------------------------------
+    "MD005": true,  // Inconsistent indentation  
+    "MD006": true,  // Consider starting bulleted lists at beginning of line  
+    "MD007": { "indent": 2 },  // Unordered list indentation  
+    "MD009": false, // Trailing spaces (often harmless in prose)  
+    "MD017": true,  // Required heading punctuation (empty or punctuation at end)  
+    "MD022": true,  // Headings should be surrounded by blank lines  
+    "MD035": true   // Horizontal rules should use `---`
+  }
+  

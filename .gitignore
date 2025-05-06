@@ -1,0 +1,45 @@
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment and package files
+.env
+.venv
+env/
+venv/
+ENV/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Distribution / packaging
+dist/
+build/
+*.so
+*.dylib
+*.dll
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+data/
+*.log
+.DS_Store 
+
+# Nested repositories
+ai_agent/ 
+task_parser/
+
+# Files with sensitive info
+Testingopenai.py
+.envpython

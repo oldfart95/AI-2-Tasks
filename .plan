@@ -1,0 +1,92 @@
+---
+title: "AI-Driven Productivity Shell Tool Integration Plan"
+description: "Merge AI-Shell-Agent with Taskmaster into one cohesive tool"
+date: "2023-07-10"
+status: "planning"
+---
+
+# AI-Driven Productivity Shell Tool Integration
+
+## Summary
+
+Here's a high-level plan to merge AI-Shell-Agent (natural-language command generation) with Taskmaster's task-parsing and execution framework into one cohesive, AI-driven productivity shell tool:
+
+You'll fork both repos, extract AI-Shell-Agent's LLM integration layers and Taskmaster's task breakup/parsing engine, then build a unified CLI (and/or PowerShell) wrapper that:
+
+- Takes free-form input
+- Uses Taskmaster's parser to break it into discrete "Verb + Object" tasks
+- Passes each to the AI-Shell-Agent backend for command synthesis
+- Presents suggestions in a REPL, lets you approve/modify before execution
+
+## 1. Fork & Setup
+
+- Fork both projects to your GitHub account (ai-shell-agent and taskmaster/python3-port) and clone locally.
+- Establish a mono-repo (e.g. `/my-agent/`) with subdirectories:
+
+```
+/my-agent/ai-agent/      ← ai-shell-agent code  
+/my-agent/task-parser/   ← taskmaster python3 port  
+/my-agent/cli/           ← your new wrapper  
+```
+
+- Install dependencies for each:
+
+```bash
+cd ai-agent && pip install -r requirements.txt  
+cd ../task-parser && pip install -r requirements.txt  
+```
+
+## 2. Extract & Modularize Core Components
+
+### 2.1 Task Parsing (Taskmaster)
+
+- In task-parser/, identify the module that extracts "Verb + Object" lists (likely parser.py).
+- Refactor it into a standalone Python package (e.g. taskmaster_parser) that exposes a function:
+
+```python
+def parse_tasks(text: str) -> List[Tuple[str,str]]
+```
+
+### 2.2 Command Synthesis (AI-Shell-Agent)
+
+- In ai-agent/, locate the HTTP client or llama.cpp wrapper (e.g. client.py).
+- Expose a function:
+
+```python
+def synthesize_command(task: str, context: Dict) -> str
+```
+
+## 3. Build the Unified CLI Wrapper
+
+In `/my-agent/cli/`, create agent.py:
+
+- Input REPL
+
+```python
+while True:
+    user_input = input(">> ")
+    tasks = parse_tasks(user_input)
+    for verb, obj in tasks:
+        cmd = synthesize_command(f"{verb} {obj}", context={…})
+        print(f"AI suggests: {cmd}")
+        if input("Run? (y/N) ").lower()=="y":
+            os.system(cmd)
+```
+
+- Context Management
+  - Maintain a history buffer to provide to the AI for better prompts.
+
+- Error Handling & Logging
+  - Wrap calls in try/except; log to a file (e.g. ~/.my_agent.log).
+
+## 4. Iteration & Testing
+
+- Unit tests for parse_tasks and synthesize_command with mocks.
+- End-to-end tests: feed example sentences and assert the generated commands match expected patterns.
+- CI Pipeline: run tests on push using GitHub Actions.
+
+## 5. Packaging & Distribution
+
+- Add a setup.py or pyproject.toml in /my-agent/ to install everything via pip install .
+- Optionally wrap as a PowerShell module or bash script that calls agent.py.
+
