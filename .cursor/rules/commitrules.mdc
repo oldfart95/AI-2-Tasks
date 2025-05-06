@@ -1,0 +1,69 @@
+---
+description: Git branches and commits as well as testing
+globs: 
+alwaysApply: false
+---
+Branch‑Naming Rules
+
+**feature/name
+
+New features: feature/add‑user‑profile
+
+**bugfix/name
+
+Bug fixes: bugfix/fix‑login‑redirect
+
+**hotfix/name
+
+Emergency production fixes: hotfix/patch‑payment‑api
+
+**chore/name
+
+Tooling updates, cleanup: chore/update‑ci‑pipeline
+
+**docs/name
+
+Documentation only: docs/clarify‑api‑usage
+
+Always lowercase, hyphens to separate words, and prefix clearly. Keep it lyrical: every branch tells its tale at a glance.
+
+Commit‑Message Rules
+
+Header line (≤50 chars):
+
+Format: <type>(<scope>): <short description>
+
+Types: feat, fix, docs, style, refactor, perf, test, chore
+
+Example:
+
+scss
+Copy
+Edit
+feat(auth): add JWT refresh‑token endpoint
+Blank line
+
+Body (wrap at 72 chars):
+
+Why this change was made, not just what.
+
+Describe any trade‑offs, limitations, or follow‑up work.
+
+Footer (for tracking):
+
+Issue references: Closes #42
+
+Breaking changes:
+
+arduino
+Copy
+Edit
+BREAKING CHANGE: config file renamed from settings.yml to config.yml
+Why this old‑school approach endures
+
+Clarity: You see intent at a glance—feature, fix, docs—no guessing.
+
+Traceability: Issue numbers and scopes tie code to conversation.
+
+Consistency: Your team sings from the same hymn‑sheet, and tooling (CI, changelog generators) dances in step.
+
